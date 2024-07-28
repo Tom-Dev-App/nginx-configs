@@ -1,0 +1,44 @@
+# REACT EXPRESS NGINX CONFIG
+# server_name <site-available filename> <domain/subdomain name server>
+ server {
+        server_name main-web contoh.productsofwebdevuiuxceleratessib6.site;
+	
+	#ROOT <WHERE THE FRONTEND SAVED ON THE SERVER> 
+        root /var/www/main-web/frontend-csib6/dist;
+        index index.html;
+
+        location / {
+            try_files $uri /index.html;
+        }
+	
+	# THIS FOR <domain/api> TO ACCESS BACKEND WITH PM2
+	# THE PORT MUST BE UNIQUE OR IT WILL COLLIDE
+        location /api {
+            proxy_pass http://localhost:5051;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+	
+# SSL CERTIFICATE WILL BE GENERATE AUTOMATICALLY BY CMD "sudo certbot"
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/contoh.productsofwebdevuiuxceleratessib6.site/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/contoh.productsofwebdevuiuxceleratessib6.site/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+        server {
+    if ($host = contoh.productsofwebdevuiuxceleratessib6.site) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        server_name main-web contoh.productsofwebdevuiuxceleratessib6.site;
+    return 404; # managed by Certbot
+
+
+}
