@@ -129,9 +129,7 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
-```
 
-```nginx
 server {
     if ($host = laravel.tomdevstudio.org) {
         return 301 https://$host$request_uri;
