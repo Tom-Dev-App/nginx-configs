@@ -170,6 +170,3 @@ Follow the prompts to complete the SSL setup. Certbot will automatically configu
 ## 🏁 Conclusion
 
 With these configurations, your Nginx server should be able to serve your **React** front-end, **Express** back-end, and **Laravel** applications efficiently. If you encounter any issues, refer to the Nginx documentation or seek help from the community.
-
-#Conclusion
-With these configurations, your Nginx server should be able to serve your React front-end, Express back-end, and Laravel applications efficiently. If you encounter any issues, refer to the Nginx documentation or seek help from the community.
